@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h3>Makaleler</h3>
+            <hr>
+        </div>
+    </div>
+    <form>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="input-group pb-3">
+                    <input type="search" name="keyword" class="form-control bg-dark-subtle" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                    <button type="button" class="btn btn-dark">Ara</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    {% if articles %}
+        {% for article in articles %}
+        <div class="">
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-md-6 offset-md-3 ">
+                       <div class="col-lg-10">
+                           <!-- Post content-->
+                           <article>
+                               <!-- Post header-->
+                               <header class="mb-4">
+                                   <!-- Post title-->
+                                   <a href="{% url 'article:detail' article.id %}"><h2 class="fw-bolder mb-1 ">Başlık : {{article.title}}</h2></a>
+                                   <!-- Post meta content-->
+                                   <p class="lead">
+                                     {{article.author.username}} Tarafından Oluşturulmuştur.
+                                   </p><br>
+                                   <h5>tarih: </h5>
+                                   <p>{{article.created_date}}</p>
+                               </header>
+                                 <!-- Preview image figure-->
+                                {% if article.articleİmage %}
+                                <a href="{% url 'article:detail' article.id %}"><figure class="mb-4"><img class="img-fluid rounded" src="{{article.articleİmage.url}}" alt="resim" /></figure></a>
+                                {% endif %}
+                                <h5>içerik: </h5>
+                               <p class="lead">
+                                       {{article.content|safe|truncatewords:50}}
+                               </p>
+                               <a style = "float: right;"href="{% url 'article:detail' article.id %}" class="btn btn-info rounded-3">Devamını Oku</a>
+                           </div>
+                       </div>
+            </div> </div>
+        </div>
+        {% endfor %}
+    {% else %}
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="alert alert-danger">
+                Bu Blogta Herhangi Bir Makale Bulunmuyor
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

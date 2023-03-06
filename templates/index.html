@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<h3>Ana Sayfa</h3>
+<hr>
+<div style="margin-top: 45px; padding: 100px;"  class="bg-dark text-white rounded text-center">
+    <h3>SD-Blog'a Hoşgeldiniz.</h3>
+    <p>Bu blogta geliştiriciler olarak blog yazılarınızı paylaşabilirsiniz ve insanlara yardımcı olabilirsiniz.</p>
+    <a href="{% url 'article:articles'%}"><button type ="button" class="btn btn-secondary">Makalelere Git</button></a>
+</div>
+{% endblock %}
